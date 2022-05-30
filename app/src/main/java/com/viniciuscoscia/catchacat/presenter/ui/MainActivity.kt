@@ -1,4 +1,4 @@
-package com.viniciuscoscia.meanime
+package com.viniciuscoscia.catchacat.presenter.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -10,13 +10,13 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.viniciuscoscia.meanime.ui.theme.MeAnimeTheme
+import com.viniciuscoscia.catchacat.presenter.ui.theme.CatchACatTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MeAnimeTheme {
+            CatchACatTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
@@ -36,7 +36,7 @@ fun Greeting(name: String) {
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
-    MeAnimeTheme {
+    CatchACatTheme {
         Greeting("Android")
     }
 }

@@ -55,9 +55,11 @@ object Libs {
     const val koinAndroid = "io.insert-koin:koin-android:${Versions.koin}"
     const val koinCompose = "io.insert-koin:koin-androidx-compose:${Versions.koin}"
     const val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin}"
-    const val kotlinSerialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.kotlinSerialization}"
+    const val kotlinSerialization =
+        "org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.kotlinSerialization}"
     const val ktorAndroid = "io.ktor:ktor-client-android:${Versions.ktor}"
-    const val ktorSerialization = "io.ktor:ktor-client-serialization:${Versions.ktor}"
+    const val ktorContentNegotiation = "io.ktor:ktor-client-content-negotiation:${Versions.ktor}"
+    const val ktorSerialization = "io.ktor:ktor-serialization-kotlinx-json:${Versions.ktor}"
     const val ktorLogging = "io.ktor:ktor-client-logging:${Versions.ktor}"
     const val ktxCore = "androidx.core:core-ktx:${Versions.ktx}"
     const val lifecycleRuntime = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycle}"
@@ -97,7 +99,7 @@ object ClassPaths {
 const val latestSdk = 32
 
 object Configs {
-    const val applicationId = "com.viniciuscoscia.meanime"
+    const val applicationId = "com.viniciuscoscia.catchacat"
     const val compileSdkVersion = latestSdk
     const val minSdkVersion = 21
     const val targetSdkVersion = latestSdk

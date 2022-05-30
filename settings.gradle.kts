@@ -1,2 +1,2 @@
-rootProject.name = "Me Anime"
+rootProject.name = "Catch a Cat"
 include(":app")

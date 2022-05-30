@@ -1,4 +1,4 @@
-package com.viniciuscoscia.meanime.ui.theme
+package com.viniciuscoscia.catchacat.presenter.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

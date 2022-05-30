@@ -106,6 +106,7 @@ dependencies {
     implementation(Libs.ktorAndroid)
     implementation(Libs.ktorLogging)
     implementation(Libs.ktorSerialization)
+    implementation(Libs.ktorContentNegotiation)
     implementation(Libs.kotlinSerialization)
 
     // Moshi
