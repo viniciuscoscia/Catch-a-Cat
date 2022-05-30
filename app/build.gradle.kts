@@ -21,7 +21,7 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
-        buildConfigField("String", "BaseUrl", "\"https://api.aniapi.com/v1/\"")
+        buildConfigField("String", "BaseUrl", "\"https://api.thecatapi.com/v1/\"")
     }
 
     buildTypes {

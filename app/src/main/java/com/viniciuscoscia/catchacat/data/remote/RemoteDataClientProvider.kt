@@ -46,6 +46,6 @@ fun provideKtorHttpClient() = HttpClient(Android) {
     install(DefaultRequest) {
         url(BuildConfig.BaseUrl)
         header(HttpHeaders.ContentType, ContentType.Application.Json)
-        header(HttpHeaders.Authorization, "Bearer ${BuildConfig.JWT}")
+        header(HttpHeaders.Authorization, "Bearer ${BuildConfig.API_KEY}")
     }
 }
