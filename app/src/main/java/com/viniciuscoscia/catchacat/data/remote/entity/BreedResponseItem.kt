@@ -11,9 +11,9 @@ data class BreedResponseItem(
     @SerialName("alt_names")
     val altNames: String,
     @SerialName("cat_friendly")
-    val catFriendly: Int,
+    val catFriendly: Int? = null,
     @SerialName("cfa_url")
-    val cfaUrl: String,
+    val cfaUrl: String? = null,
     @SerialName("child_friendly")
     val childFriendly: Int,
     @SerialName("country_code")
@@ -32,10 +32,10 @@ data class BreedResponseItem(
     val healthIssues: Int,
     val hypoallergenic: Int,
     val id: String,
-    val image: Image,
+    val image: Image? = null,
     val indoor: Int,
     val intelligence: Int,
-    val lap: Int,
+    val lap: Int? = null,
     @SerialName("life_span")
     val lifeSpan: String,
     val name: String,
@@ -57,9 +57,9 @@ data class BreedResponseItem(
     val suppressedTail: Int,
     val temperament: String,
     @SerialName("vcahospitals_url")
-    val vcaHospitalsUrl: String,
+    val vcaHospitalsUrl: String? = null,
     @SerialName("vetstreet_url")
-    val vetStreetUrl: String,
+    val vetStreetUrl: String? = null,
     val vocalisation: Int,
     val weight: Weight,
     @SerialName("wikipedia_url")

@@ -14,6 +14,7 @@ import kotlinx.serialization.json.Json
 import timber.log.Timber
 
 private const val DEFAULT_TIMEOUT_MILLISECONDS = 5_000L
+private const val API_KEY_HEADER = "x-api-key"
 
 fun provideKtorHttpClient() = HttpClient(Android) {
     install(ContentNegotiation) {
@@ -43,9 +44,9 @@ fun provideKtorHttpClient() = HttpClient(Android) {
         }
     }
 
-    install(DefaultRequest) {
+    defaultRequest {
         url(BuildConfig.BaseUrl)
         header(HttpHeaders.ContentType, ContentType.Application.Json)
-        header(HttpHeaders.Authorization, "Bearer ${BuildConfig.API_KEY}")
+        header(API_KEY_HEADER, BuildConfig.API_KEY)
     }
 }
