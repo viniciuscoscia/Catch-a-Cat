@@ -7,10 +7,10 @@ import kotlinx.serialization.Serializable
 data class CatImagesRequestItem(
     val breeds: List<BreedResponseItem>,
     val categories: List<Category>? = null,
-    val height: Int,
+    val height: Int?,
     val id: String,
     val url: String,
-    val width: Int
+    val width: Int?
 ) {
     @Serializable
     data class Category(

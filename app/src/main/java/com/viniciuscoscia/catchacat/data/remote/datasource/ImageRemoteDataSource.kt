@@ -20,7 +20,7 @@ class ImageRemoteDataSourceImpl(
     }
 
     companion object {
-        private const val DEFAULT_PAGE_SIZE = 20
+        private const val DEFAULT_PAGE_SIZE = 12
         private const val BASE_IMAGES_PATH = "images"
         private const val SEARCH_PATH = "search"
         private const val PAGE_SIZE_PARAMETER = "limit"

@@ -2,22 +2,11 @@ package com.viniciuscoscia.catchacat.presenter.ui.screen.catimages
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.viniciuscoscia.catchacat.domain.usecase.GetCatImagesUseCase
-import kotlinx.coroutines.launch
-import timber.log.Timber
+import androidx.paging.cachedIn
+import com.viniciuscoscia.catchacat.presenter.paging.CatImagesPager
 
 class CatImagesViewModel(
-    private val getCatImagesUseCase: GetCatImagesUseCase
+    catImagesPager: CatImagesPager
 ) : ViewModel() {
-    init {
-        viewModelScope.launch {
-            val a = getCatImagesUseCase(0)
-
-            if (a.isSuccess) {
-                a.getOrNull()?.forEach {
-                    Timber.d(it.imageUrl)
-                }
-            }
-        }
-    }
+    val catImages = catImagesPager.getCatImagesFlow().cachedIn(viewModelScope)
 }
