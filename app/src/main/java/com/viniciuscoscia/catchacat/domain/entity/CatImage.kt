@@ -1,8 +1,8 @@
 package com.viniciuscoscia.catchacat.domain.entity
 
 data class CatImage(
-    val id: String,
-    val imageUrl: String,
-    val breedName: String?,
-    val breedId: String?
+    val height: Int? = null,
+    val id: String? = null,
+    val url: String? = null,
+    val width: Int? = null
 )

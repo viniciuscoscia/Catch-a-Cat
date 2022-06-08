@@ -1,5 +1,6 @@
 package com.viniciuscoscia.catchacat.data.remote.entity
 
+import com.viniciuscoscia.catchacat.domain.entity.CatBreed
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -32,7 +33,7 @@ data class BreedResponseItem(
     val healthIssues: Int?,
     val hypoallergenic: Int?,
     val id: String?,
-    val image: Image?,
+    val image: ImageResponseItem?,
     val indoor: Int?,
     val intelligence: Int?,
     val lap: Int?,
@@ -61,21 +62,49 @@ data class BreedResponseItem(
     @SerialName("vetstreet_url")
     val vetStreetUrl: String?,
     val vocalisation: Int?,
-    val weight: Weight?,
+    val weight: WeightResponseItem?,
     @SerialName("wikipedia_url")
     val wikipediaUrl: String?
-) {
-    @Serializable
-    data class Image(
-        val height: Int?,
-        val id: String?,
-        val url: String?,
-        val width: Int?
-    )
+)
 
-    @Serializable
-    data class Weight(
-        val imperial: String?,
-        val metric: String?
-    )
-}
+fun BreedResponseItem.toDomain() = CatBreed(
+    adaptability = adaptability,
+    affectionLevel = affectionLevel,
+    altNames = altNames,
+    catFriendly = catFriendly,
+    cfaUrl = cfaUrl,
+    childFriendly = childFriendly,
+    countryCode = countryCode,
+    countryCodes = countryCodes,
+    description = description,
+    dogFriendly = dogFriendly,
+    energyLevel = energyLevel,
+    experimental = experimental,
+    grooming = grooming,
+    hairless = hairless,
+    healthIssues = healthIssues,
+    hypoallergenic = hypoallergenic,
+    id = id,
+    image = image?.toDomain(),
+    indoor = indoor,
+    intelligence = intelligence,
+    lap = lap,
+    lifeSpan = lifeSpan,
+    name = name,
+    natural = natural,
+    origin = origin,
+    rare = rare,
+    referenceImageId = referenceImageId,
+    rex = rex,
+    sheddingLevel = sheddingLevel,
+    shortLegs = shortLegs,
+    socialNeeds = socialNeeds,
+    strangerFriendly = strangerFriendly,
+    suppressedTail = suppressedTail,
+    temperament = temperament,
+    vcaHospitalsUrl = vcaHospitalsUrl,
+    vetStreetUrl = vetStreetUrl,
+    vocalisation = vocalisation,
+    weight = weight?.toDomain(),
+    wikipediaUrl = wikipediaUrl
+)

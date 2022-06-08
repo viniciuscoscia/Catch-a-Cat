@@ -89,8 +89,8 @@ dependencies {
     implementation(Libs.composeFoundationLayout)
     implementation(Libs.activityCompose)
     implementation(Libs.androidNavigationCompose)
-    implementation(Libs.pagingCompose)
     implementation(Libs.composeConstraintLayout)
+    implementation(Libs.composePager)
     debugImplementation(Libs.composeTooling)
 
     // Coil
@@ -113,6 +113,9 @@ dependencies {
     implementation(Libs.moshi)
     implementation(Libs.moshiKotlin)
     kapt(Libs.moshiCodegenKapt)
+
+    // Paging
+    implementation(Libs.pagingCompose)
 
     // Log
     implementation(Libs.timber)

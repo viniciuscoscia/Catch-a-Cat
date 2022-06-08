@@ -33,7 +33,7 @@ fun ImageLoader(
         when (painter.state) {
             is AsyncImagePainter.State.Loading -> {
                 Box(
-                    modifier = Modifier.fillMaxSize(),
+                    modifier = Modifier.size(150.dp),
                     contentAlignment = Alignment.Center
                 ) {
                     CircularProgressIndicator(modifier = Modifier.size(progressBarSize.dp))
@@ -49,7 +49,7 @@ fun ImageLoader(
                 )
             }
             else -> {
-                SubcomposeAsyncImageContent()
+                SubcomposeAsyncImageContent(modifier = Modifier.fillMaxSize())
             }
         }
     }

@@ -1,4 +1,5 @@
 object Versions {
+    const val composePager = "0.23.1"
     const val androidAppCompat = "1.4.1"
     const val androidExtJUnit = "1.1.3"
     const val androidEspresso = "3.4.0"
@@ -6,11 +7,11 @@ object Versions {
     const val androidPlugin = "7.2.1"
     const val activityCompose = "1.4.0"
     const val coil = "2.1.0"
-    const val compose = "1.1.1"
+    const val compose = "1.2.0-beta03"
     const val composeConstraintLayout = "1.0.1"
     const val jUnit = "4.13.2"
     const val koin = "3.2.0"
-    const val kotlin = "1.6.10"
+    const val kotlin = "1.6.21"
     const val kotlinSerialization = "1.3.3"
     const val ktor = "2.0.2"
     const val ktx = "1.7.0"
@@ -42,6 +43,7 @@ object Libs {
     const val composeConstraintLayout =
         "androidx.constraintlayout:constraintlayout-compose:${Versions.composeConstraintLayout}"
     const val composeFoundation = "androidx.compose.foundation:foundation:${Versions.compose}"
+    const val composePager = "com.google.accompanist:accompanist-pager:${Versions.composePager}"
     const val composeFoundationLayout =
         "androidx.compose.foundation:foundation-layout:${Versions.compose}"
     const val composeMaterial = "androidx.compose.material:material:${Versions.compose}"

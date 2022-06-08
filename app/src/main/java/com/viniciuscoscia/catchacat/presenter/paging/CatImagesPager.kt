@@ -4,7 +4,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.viniciuscoscia.catchacat.domain.entity.CatImage
+import com.viniciuscoscia.catchacat.domain.entity.CatRandomImage
 import com.viniciuscoscia.catchacat.domain.usecase.GetCatImagesUseCase
 
 class CatImagesPager(private val getCatImagesUseCase: GetCatImagesUseCase) {
@@ -19,8 +19,8 @@ class CatImagesPager(private val getCatImagesUseCase: GetCatImagesUseCase) {
 
 private class CatImagesPagingSource(
     private val getCatImagesUseCase: GetCatImagesUseCase
-) : PagingSource<Int, CatImage>() {
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, CatImage> {
+) : PagingSource<Int, CatRandomImage>() {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, CatRandomImage> {
         val pageIndex = if (params is LoadParams.Refresh) {
             STARTING_PAGE_INDEX
         } else {
@@ -40,7 +40,7 @@ private class CatImagesPagingSource(
         }
     }
 
-    override fun getRefreshKey(state: PagingState<Int, CatImage>): Int? {
+    override fun getRefreshKey(state: PagingState<Int, CatRandomImage>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
             state.closestPageToPosition(anchorPosition)?.prevKey?.plus(1)
                 ?: state.closestPageToPosition(anchorPosition)?.nextKey?.minus(1)
