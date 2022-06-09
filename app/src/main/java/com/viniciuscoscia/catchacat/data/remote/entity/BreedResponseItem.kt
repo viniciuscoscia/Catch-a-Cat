@@ -108,3 +108,5 @@ fun BreedResponseItem.toDomain() = CatBreed(
     weight = weight?.toDomain(),
     wikipediaUrl = wikipediaUrl
 )
+
+fun List<BreedResponseItem>.toDomain() = map { it.toDomain() }
