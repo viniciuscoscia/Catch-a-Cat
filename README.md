@@ -15,6 +15,7 @@ Used technologies:
 Also, applied some Clean Arch concepts
 
 To run this application, set a "API_KEY" in your local.properties file inside your project.
+
 You can get a free API key here: https://thecatapi.com/
 
 WIP
