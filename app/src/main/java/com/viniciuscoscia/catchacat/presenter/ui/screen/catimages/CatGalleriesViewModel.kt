@@ -4,12 +4,13 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
-import com.viniciuscoscia.catchacat.presenter.paging.CatImagesPager
+import com.viniciuscoscia.catchacat.domain.entity.imagesearch.ImageSearchParam
+import com.viniciuscoscia.catchacat.presenter.paging.CatImagesSearchPager
 import com.viniciuscoscia.catchacat.presenter.ui.model.ImageGallery
 import kotlinx.coroutines.launch
 
 class CatGalleriesViewModel(
-    catImagesPager: CatImagesPager
+    catImagesSearchPager: CatImagesSearchPager
 ) : ViewModel() {
     private val _imageGalleries = mutableStateListOf<ImageGallery>()
     val imageGalleries: List<ImageGallery> = _imageGalleries
@@ -18,12 +19,17 @@ class CatGalleriesViewModel(
         viewModelScope.launch {
             _imageGalleries.add(
                 ImageGallery(
-                    "Teste 1", catImagesPager.getCatImagesFlow().cachedIn(viewModelScope)
+                    "Teste 1", catImagesSearchPager
+                        .searchForPagingImages()
+                        .cachedIn(viewModelScope)
                 )
             )
+
             _imageGalleries.add(
                 ImageGallery(
-                    "Teste 2", catImagesPager.getCatImagesFlow().cachedIn(viewModelScope)
+                    "Teste 2", catImagesSearchPager.searchForPagingImages(
+                        searchParams = listOf(ImageSearchParam.BreedId("beng"))
+                    ).cachedIn(viewModelScope)
                 )
             )
         }

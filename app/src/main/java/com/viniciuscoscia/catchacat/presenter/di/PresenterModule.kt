@@ -2,14 +2,14 @@
 
 package com.viniciuscoscia.catchacat.presenter.di
 
-import com.viniciuscoscia.catchacat.presenter.paging.CatImagesPager
+import com.viniciuscoscia.catchacat.presenter.paging.CatImagesSearchPager
 import com.viniciuscoscia.catchacat.presenter.ui.screen.catimages.CatGalleriesViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val presenterModule = module {
     viewModel {
-        CatGalleriesViewModel(catImagesPager = get())
+        CatGalleriesViewModel(catImagesSearchPager = get())
     }
-    factory<CatImagesPager> { CatImagesPager(getCatImagesUseCase = get()) }
+    factory<CatImagesSearchPager> { CatImagesSearchPager(getCatImagesUseCase = get()) }
 }
