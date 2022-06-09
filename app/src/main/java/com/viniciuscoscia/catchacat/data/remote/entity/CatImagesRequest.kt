@@ -1,6 +1,6 @@
 package com.viniciuscoscia.catchacat.data.remote.entity
 
-import com.viniciuscoscia.catchacat.domain.entity.CatRandomImage
+import com.viniciuscoscia.catchacat.domain.entity.CatImage
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -13,9 +13,9 @@ data class CatImagesRequestItem(
     val width: Int?
 )
 
-fun CatImagesRequestItem.toDomain() = CatRandomImage(
+fun CatImagesRequestItem.toDomain() = CatImage(
     id = id,
-    imageUrl = url,
+    url = url,
     catBreed = breeds?.firstOrNull()?.toDomain(),
     categories = categories?.map { it.toDomain() }
 )

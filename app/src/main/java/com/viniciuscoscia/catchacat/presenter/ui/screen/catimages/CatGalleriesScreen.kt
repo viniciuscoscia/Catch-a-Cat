@@ -19,8 +19,9 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.VerticalPager
 import com.google.accompanist.pager.rememberPagerState
-import com.viniciuscoscia.catchacat.domain.entity.CatRandomImage
+import com.viniciuscoscia.catchacat.domain.entity.CatImage
 import com.viniciuscoscia.catchacat.presenter.ui.component.image.ImageLoader
+import com.viniciuscoscia.catchacat.presenter.ui.model.ImageGallery
 import com.viniciuscoscia.catchacat.presenter.ui.theme.CatchACatTheme
 import org.koin.androidx.compose.getViewModel
 
@@ -42,7 +43,7 @@ fun CatGalleriesScreen(
                     .padding(paddingValues)
             ) {
                 val pagerState = rememberPagerState()
-                val imageGalleries = viewModel.imageGalleries
+                val imageGalleries: List<ImageGallery> = viewModel.imageGalleries
 
                 VerticalPager(
                     count = imageGalleries.size,
@@ -65,7 +66,7 @@ fun CatGalleriesScreen(
 @Composable
 private fun CatImageCarousel(
     title: String,
-    catImages: LazyPagingItems<CatRandomImage>,
+    catImages: LazyPagingItems<CatImage>,
     onCatImageClicked: (imageId: String) -> Unit
 ) {
     val pagerState = rememberPagerState()
@@ -76,7 +77,6 @@ private fun CatImageCarousel(
             count = catImages.itemCount,
             state = pagerState
         ) { page ->
-            // Our page content
             catImages[page]?.let {
                 CatCard(
                     catImage = it,
@@ -91,12 +91,12 @@ private fun CatImageCarousel(
 
 @Composable
 private fun CatCard(
-    catImage: CatRandomImage,
+    catImage: CatImage,
     modifier: Modifier = Modifier
 ) {
     Column(modifier = modifier.fillMaxSize()) {
         ImageLoader(
-            imageUrl = catImage.imageUrl,
+            imageUrl = catImage.url,
             modifier = Modifier
                 .fillMaxSize(),
             contentScale = ContentScale.Fit
