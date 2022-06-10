@@ -60,7 +60,7 @@ fun CatGalleriesScreen(
                     ) { index ->
                         imageGalleries[index].apply {
                             CatImageCarousel(
-                                title = title,
+                                title = galleryType.displayName,
                                 catImages = images.collectAsLazyPagingItems()
                             )
                         }
@@ -107,7 +107,7 @@ private fun CatCard(
             imageUrl = catImage.url,
             imageLoader = ImageLoader.Builder(LocalContext.current)
                 .components {
-                    if (Build.VERSION.SDK_INT >= 28) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                         add(ImageDecoderDecoder.Factory())
                     } else {
                         add(GifDecoder.Factory())

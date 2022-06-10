@@ -1,4 +1,4 @@
-package com.viniciuscoscia.catchacat.presenter.paging
+package com.viniciuscoscia.catchacat.data.paging
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
@@ -6,20 +6,20 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.viniciuscoscia.catchacat.domain.entity.CatImage
 import com.viniciuscoscia.catchacat.domain.entity.imagesearch.ImageSearchParam
-import com.viniciuscoscia.catchacat.domain.usecase.GetCatImagesUseCase
+import com.viniciuscoscia.catchacat.domain.repository.CatRepository
 
-class CatImagesSearchPager(private val getCatImagesUseCase: GetCatImagesUseCase) {
+class CatImagesSearchPager(private val catRepository: CatRepository) {
     fun searchForPagingImages(searchParams: List<ImageSearchParam>? = null) = Pager(
         config = PagingConfig(
             pageSize = 12,
             prefetchDistance = 6
         ),
-        pagingSourceFactory = { CatImagesPagingSource(getCatImagesUseCase, searchParams) }
+        pagingSourceFactory = { CatImagesPagingSource(catRepository, searchParams) }
     ).flow
 }
 
 private class CatImagesPagingSource(
-    private val getCatImagesUseCase: GetCatImagesUseCase,
+    private val catRepository: CatRepository,
     private val searchParams: List<ImageSearchParam>? = null
 ) : PagingSource<Int, CatImage>() {
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, CatImage> {
@@ -29,7 +29,7 @@ private class CatImagesPagingSource(
             params.key ?: STARTING_PAGE_INDEX
         }
 
-        val result = getCatImagesUseCase(pageIndex, searchParams)
+        val result = catRepository.getCatImages(pageIndex, searchParams)
 
         return if (result.isSuccess && result.getOrNull() != null) {
             LoadResult.Page(

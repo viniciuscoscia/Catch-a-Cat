@@ -1,6 +1,6 @@
 package com.viniciuscoscia.catchacat.data.remote.entity
 
-import com.viniciuscoscia.catchacat.domain.entity.ImageCategory
+import com.viniciuscoscia.catchacat.domain.entity.ImageCATegory
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -9,7 +9,7 @@ data class CategoryResponseItem(
     val name: String
 )
 
-fun CategoryResponseItem.toDomain() = ImageCategory(
+fun CategoryResponseItem.toDomain() = ImageCATegory(
     id = id,
     name = name
 )

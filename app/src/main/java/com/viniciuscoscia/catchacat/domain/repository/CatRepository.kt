@@ -6,7 +6,7 @@ import com.viniciuscoscia.catchacat.domain.entity.imagesearch.ImageSearchParam
 
 interface CatRepository {
     suspend fun getCatImages(
-        page: Int,
+        page: Int = 0,
         searchParams: List<ImageSearchParam>?
     ): Result<List<CatImage>>
 
