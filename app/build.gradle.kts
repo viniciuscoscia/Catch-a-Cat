@@ -99,6 +99,7 @@ dependencies {
 
     // Coil
     implementation(Libs.coil)
+    implementation(Libs.coilGif)
     implementation(Libs.coilCompose)
 
     // Room

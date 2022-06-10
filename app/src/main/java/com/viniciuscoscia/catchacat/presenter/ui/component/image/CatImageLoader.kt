@@ -12,23 +12,26 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import coil.ImageLoader
 import coil.compose.AsyncImagePainter
 import coil.compose.SubcomposeAsyncImage
 import coil.compose.SubcomposeAsyncImageContent
 import com.viniciuscoscia.catchacat.R
 
 @Composable
-fun ImageLoader(
+fun CatImageLoader(
     imageUrl: String?,
     modifier: Modifier = Modifier,
+    imageLoader: ImageLoader,
     progressBarSize: Int = 30,
-    contentScale: ContentScale = ContentScale.Fit
+    contentScale: ContentScale = ContentScale.Fit,
 ) {
     SubcomposeAsyncImage(
         model = imageUrl,
+        imageLoader = imageLoader,
         contentScale = contentScale,
         modifier = modifier,
-        contentDescription = stringResource(R.string.cat_image_description)
+        contentDescription = stringResource(R.string.cat_image_description),
     ) {
         when (painter.state) {
             is AsyncImagePainter.State.Loading -> {

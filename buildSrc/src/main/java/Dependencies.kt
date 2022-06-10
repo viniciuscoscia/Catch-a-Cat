@@ -35,6 +35,7 @@ object Libs {
     const val androidNavigationCompose =
         "androidx.navigation:navigation-compose:${Versions.navigationCompose}"
     const val coil = "io.coil-kt:coil:${Versions.coil}"
+    const val coilGif = "io.coil-kt:coil-gif:${Versions.coil}"
     const val coilCompose = "io.coil-kt:coil-compose:${Versions.coil}"
     const val coroutines =
         "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.kotlinCoroutines}"
