@@ -1,7 +1,7 @@
 package com.viniciuscoscia.catchacat.presenter.ui.model
 
 import com.viniciuscoscia.catchacat.domain.entity.CatBreed
-import com.viniciuscoscia.catchacat.domain.entity.ImageCATegory
+import com.viniciuscoscia.catchacat.domain.entity.CatImageCategory
 
 sealed interface GalleryType {
     fun getDisplayName(): String
@@ -22,7 +22,7 @@ sealed interface GalleryType {
     /*
      * Category as a list because a request can take more than one category type
      */
-    data class Category(val categoryUIModel: List<ImageCATegory>) : GalleryType {
+    data class Category(val categoryUIModel: List<CatImageCategory>) : GalleryType {
         override fun getDisplayName() =
             "Category: ${categoryUIModel.map { it.name }.joinToString { ", " }}"
     }

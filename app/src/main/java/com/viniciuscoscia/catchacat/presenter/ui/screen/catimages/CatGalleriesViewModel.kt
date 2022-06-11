@@ -28,7 +28,7 @@ class CatGalleriesViewModel(
     }
 
     private fun fetchGalleries() = viewModelScope.launch(Dispatchers.IO) {
-        awaitAll(getCatBreedsAsync(), getCATegoriesAsync())
+        awaitAll(getCatBreedsAsync(), getCategoriesAsync())
             .flatten()
             .shuffled()
             .forEach {
@@ -37,7 +37,7 @@ class CatGalleriesViewModel(
             }
     }
 
-    private fun CoroutineScope.getCATegoriesAsync(): Deferred<List<ImageGallery>> = async {
+    private fun CoroutineScope.getCategoriesAsync(): Deferred<List<ImageGallery>> = async {
         getImageCategoriesUseCase()
             .getOrDefault(emptyList())
             .map {

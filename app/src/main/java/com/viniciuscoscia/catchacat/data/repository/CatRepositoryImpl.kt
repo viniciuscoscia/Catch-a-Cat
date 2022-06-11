@@ -6,7 +6,7 @@ import com.viniciuscoscia.catchacat.data.remote.datasource.ImageRemoteDataSource
 import com.viniciuscoscia.catchacat.data.remote.entity.toDomain
 import com.viniciuscoscia.catchacat.domain.entity.CatBreed
 import com.viniciuscoscia.catchacat.domain.entity.CatImage
-import com.viniciuscoscia.catchacat.domain.entity.ImageCATegory
+import com.viniciuscoscia.catchacat.domain.entity.CatImageCategory
 import com.viniciuscoscia.catchacat.domain.entity.imagesearch.ImageSearchParam
 import com.viniciuscoscia.catchacat.domain.repository.CatRepository
 import kotlinx.coroutines.Dispatchers
@@ -39,7 +39,7 @@ class CatRepositoryImpl(
         }
     }
 
-    override suspend fun getImageCategories(): Result<List<ImageCATegory>> {
+    override suspend fun getImageCategories(): Result<List<CatImageCategory>> {
         return runCatching {
             categoriesRemoteSource.getImageCategories().toDomain()
         }

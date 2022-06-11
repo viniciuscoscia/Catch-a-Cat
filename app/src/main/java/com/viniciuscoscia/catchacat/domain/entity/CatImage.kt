@@ -4,7 +4,7 @@ data class CatImage(
     val id: String,
     val url: String,
     val catBreed: CatBreed? = null,
-    val categories: List<ImageCATegory>? = null,
+    val categories: List<CatImageCategory>? = null,
     val height: Int? = null,
     val width: Int? = null
 )
