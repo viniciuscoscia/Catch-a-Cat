@@ -11,7 +11,8 @@ val presenterModule = module {
     viewModel {
         CatGalleriesViewModel(
             imagesSearchPager = get(),
-            getCatBreedsUseCase = get()
+            getCatBreedsUseCase = get(),
+            getImageCategoriesUseCase = get()
         )
     }
     factory<CatImagesSearchPager> { CatImagesSearchPager(catRepository = get()) }

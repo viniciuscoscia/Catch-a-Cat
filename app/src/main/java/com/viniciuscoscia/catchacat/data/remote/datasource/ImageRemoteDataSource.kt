@@ -17,11 +17,14 @@ class ImageRemoteDataSourceImpl(
         return httpClient.get {
             url {
                 path("$BASE_IMAGES_PATH/$SEARCH_PATH")
-                parameters.append(PAGE_SIZE_PARAMETER, DEFAULT_PAGE_SIZE.toString())
-                parameters.append(PAGE_PARAMETER, page.toString())
                 searchParams?.forEach { requestParameter ->
-                    parameters.appendAll(requestParameter.key, requestParameter.value)
+                    encodedParameters.append(
+                        requestParameter.key,
+                        requestParameter.value.joinToString(",")
+                    )
                 }
+                parameters.append(PAGE_PARAMETER, page.toString())
+                parameters.append(PAGE_SIZE_PARAMETER, DEFAULT_PAGE_SIZE.toString())
             }
         }.body()
     }

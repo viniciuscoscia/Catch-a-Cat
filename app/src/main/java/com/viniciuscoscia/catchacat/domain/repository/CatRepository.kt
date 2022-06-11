@@ -2,6 +2,7 @@ package com.viniciuscoscia.catchacat.domain.repository
 
 import com.viniciuscoscia.catchacat.domain.entity.CatBreed
 import com.viniciuscoscia.catchacat.domain.entity.CatImage
+import com.viniciuscoscia.catchacat.domain.entity.ImageCATegory
 import com.viniciuscoscia.catchacat.domain.entity.imagesearch.ImageSearchParam
 
 interface CatRepository {
@@ -11,4 +12,6 @@ interface CatRepository {
     ): Result<List<CatImage>>
 
     suspend fun getCatBreeds(): Result<List<CatBreed>>
+
+    suspend fun getImageCategories(): Result<List<ImageCATegory>>
 }

@@ -7,6 +7,7 @@ import com.viniciuscoscia.catchacat.data.paging.CatImagesSearchPager
 import com.viniciuscoscia.catchacat.domain.entity.CatBreed
 import com.viniciuscoscia.catchacat.domain.entity.ImageCATegory
 import com.viniciuscoscia.catchacat.domain.usecase.GetCatBreedsUseCase
+import com.viniciuscoscia.catchacat.domain.usecase.GetImageCategoriesUseCase
 import com.viniciuscoscia.catchacat.presenter.ui.model.GalleryType
 import com.viniciuscoscia.catchacat.presenter.ui.model.ImageGallery
 import com.viniciuscoscia.catchacat.presenter.ui.model.factory.ImageGalleryFactory
@@ -14,20 +15,22 @@ import kotlinx.coroutines.launch
 
 class CatGalleriesViewModel(
     imagesSearchPager: CatImagesSearchPager,
-    private val getCatBreedsUseCase: GetCatBreedsUseCase
+    private val getCatBreedsUseCase: GetCatBreedsUseCase,
+    private val getImageCategoriesUseCase: GetImageCategoriesUseCase
 ) : ViewModel() {
     private val galleryFactory = ImageGalleryFactory(imagesSearchPager, viewModelScope)
 
     private val _imageGalleries = mutableStateListOf<ImageGallery>()
     val imageGalleries: List<ImageGallery> = _imageGalleries
 
-    private val catBreeds: MutableList<CatBreed> = arrayListOf()
-    private val imageCategories: List<ImageCATegory> = listOf()
+    private var catBreeds: List<CatBreed> = listOf()
+    private var imageCategories: List<ImageCATegory> = listOf()
 
     init {
         addDefaultImageGalleries()
         viewModelScope.launch {
-            catBreeds.addAll(getCatBreedsUseCase().getOrDefault(emptyList()))
+            catBreeds = getCatBreedsUseCase().getOrDefault(emptyList())
+            imageCategories = getImageCategoriesUseCase().getOrDefault(emptyList())
         }
     }
 

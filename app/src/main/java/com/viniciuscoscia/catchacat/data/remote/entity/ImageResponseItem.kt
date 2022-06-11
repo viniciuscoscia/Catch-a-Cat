@@ -5,15 +5,19 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class ImageResponseItem(
-    val id: String,
-    val url: String,
+    val id: String?,
+    val url: String?,
     val height: Int?,
     val width: Int?
 )
 
-fun ImageResponseItem.toDomain() = CatImage(
-    height = height,
-    id = id,
-    url = url,
-    width = width
-)
+fun ImageResponseItem.toDomain(): CatImage? {
+    if (url == null || id == null) return null
+
+    return CatImage(
+        height = height,
+        id = id,
+        url = url,
+        width = width
+    )
+}

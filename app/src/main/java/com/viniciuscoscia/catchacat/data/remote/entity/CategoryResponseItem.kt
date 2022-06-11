@@ -9,6 +9,8 @@ data class CategoryResponseItem(
     val name: String
 )
 
+fun List<CategoryResponseItem>.toDomain() = map { it.toDomain() }
+
 fun CategoryResponseItem.toDomain() = ImageCATegory(
     id = id,
     name = name
