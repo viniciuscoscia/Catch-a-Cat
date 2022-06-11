@@ -44,7 +44,7 @@ class ImageGalleryFactory(
                     }
                     is Category -> {
                         ImageSearchParam.CategoryIds(
-                            categories = galleryType.categoryModel.map { it.id }
+                            categories = galleryType.categoryUIModel.map { it.id }
                         )
                     }
                 }

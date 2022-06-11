@@ -1,6 +1,8 @@
 package com.viniciuscoscia.catchacat.domain.entity
 
 data class CatBreed(
+    val id: String,
+    val name: String,
     val adaptability: Int? = null,
     val affectionLevel: Int? = null,
     val altNames: String? = null,
@@ -17,13 +19,11 @@ data class CatBreed(
     val hairless: Int? = null,
     val healthIssues: Int? = null,
     val hypoallergenic: Int? = null,
-    val id: String? = null,
     val image: CatImage? = null,
     val indoor: Int? = null,
     val intelligence: Int? = null,
     val lap: Int? = null,
     val lifeSpan: String? = null,
-    val name: String? = null,
     val natural: Int? = null,
     val origin: String? = null,
     val rare: Int? = null,

@@ -27,8 +27,7 @@ class CatRepositoryImpl(
                 searchParams = hashMapOf<String, List<String>>()
                     .apply {
                         searchParams?.forEach {
-                            val searchParam = it.toMap()
-                            putAll(searchParam)
+                            putAll(it.toMap())
                         }
                     }).toDomain()
         }
@@ -36,7 +35,7 @@ class CatRepositoryImpl(
 
     override suspend fun getCatBreeds(): Result<List<CatBreed>> {
         return runCatching {
-            breedRemoteSource.getCatBreeds().toDomain()
+            breedRemoteSource.getCatBreeds().toDomain().filterNotNull()
         }
     }
 

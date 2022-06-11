@@ -1,9 +1,7 @@
 package com.viniciuscoscia.catchacat.presenter.ui.component.image
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -24,13 +22,15 @@ fun CatImageLoader(
     modifier: Modifier = Modifier,
     imageLoader: ImageLoader,
     progressBarSize: Int = 30,
-    contentScale: ContentScale = ContentScale.Fit,
+    contentScale: ContentScale,
 ) {
     SubcomposeAsyncImage(
         model = imageUrl,
         imageLoader = imageLoader,
+        modifier = modifier
+            .fillMaxWidth()
+            .height(600.dp),
         contentScale = contentScale,
-        modifier = modifier,
         contentDescription = stringResource(R.string.cat_image_description),
     ) {
         when (painter.state) {
@@ -45,14 +45,15 @@ fun CatImageLoader(
             is AsyncImagePainter.State.Error,
             is AsyncImagePainter.State.Empty -> {
                 Image(
-                    painterResource(R.drawable.ic_launcher_background),
+                    painter = painterResource(R.drawable.ic_launcher_background),
                     contentDescription = "",
-                    contentScale = ContentScale.Fit,
                     modifier = Modifier.fillMaxSize()
                 )
             }
             else -> {
-                SubcomposeAsyncImageContent(modifier = Modifier.fillMaxSize())
+                SubcomposeAsyncImageContent(
+                    modifier = Modifier.fillMaxWidth()
+                )
             }
         }
     }

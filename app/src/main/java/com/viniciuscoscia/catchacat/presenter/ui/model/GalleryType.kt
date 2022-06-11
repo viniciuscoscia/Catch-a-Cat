@@ -1,8 +1,29 @@
 package com.viniciuscoscia.catchacat.presenter.ui.model
 
-sealed class GalleryType(val displayName: String) {
-    object RandomImages : GalleryType("Random Images")
-    object RandomGifs : GalleryType("Random GIFs")
-    class Breed(val breedModel: CatBreedUiModel) : GalleryType("Breed")
-    class Category(val categoryModel: List<CATegoryModel>) : GalleryType("CATegory")
+import com.viniciuscoscia.catchacat.domain.entity.CatBreed
+import com.viniciuscoscia.catchacat.domain.entity.ImageCATegory
+
+sealed interface GalleryType {
+    fun getDisplayName(): String
+
+    object RandomImages : GalleryType {
+        override fun getDisplayName() = "Random Images"
+    }
+
+    object RandomGifs : GalleryType {
+        override fun getDisplayName() = "Random GIFs"
+    }
+
+    data class Breed(val breedModel: CatBreed) : GalleryType {
+        override fun getDisplayName() =
+            "Breed: ${breedModel.name.lowercase().replaceFirstChar { it.uppercase() }} >"
+    }
+
+    /*
+     * Category as a list because a request can take more than one category type
+     */
+    data class Category(val categoryUIModel: List<ImageCATegory>) : GalleryType {
+        override fun getDisplayName() =
+            "Category: ${categoryUIModel.map { it.name }.joinToString { ", " }}"
+    }
 }

@@ -4,14 +4,13 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.viniciuscoscia.catchacat.data.paging.CatImagesSearchPager
-import com.viniciuscoscia.catchacat.domain.entity.CatBreed
-import com.viniciuscoscia.catchacat.domain.entity.ImageCATegory
 import com.viniciuscoscia.catchacat.domain.usecase.GetCatBreedsUseCase
 import com.viniciuscoscia.catchacat.domain.usecase.GetImageCategoriesUseCase
 import com.viniciuscoscia.catchacat.presenter.ui.model.GalleryType
 import com.viniciuscoscia.catchacat.presenter.ui.model.ImageGallery
 import com.viniciuscoscia.catchacat.presenter.ui.model.factory.ImageGalleryFactory
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
+import timber.log.Timber
 
 class CatGalleriesViewModel(
     imagesSearchPager: CatImagesSearchPager,
@@ -23,15 +22,35 @@ class CatGalleriesViewModel(
     private val _imageGalleries = mutableStateListOf<ImageGallery>()
     val imageGalleries: List<ImageGallery> = _imageGalleries
 
-    private var catBreeds: List<CatBreed> = listOf()
-    private var imageCategories: List<ImageCATegory> = listOf()
-
     init {
         addDefaultImageGalleries()
-        viewModelScope.launch {
-            catBreeds = getCatBreedsUseCase().getOrDefault(emptyList())
-            imageCategories = getImageCategoriesUseCase().getOrDefault(emptyList())
-        }
+        fetchGalleries()
+    }
+
+    private fun fetchGalleries() = viewModelScope.launch(Dispatchers.IO) {
+        awaitAll(getCatBreedsAsync(), getCATegoriesAsync())
+            .flatten()
+            .shuffled()
+            .forEach {
+                Timber.d("Added gallery: $it")
+                _imageGalleries.add(it)
+            }
+    }
+
+    private fun CoroutineScope.getCATegoriesAsync(): Deferred<List<ImageGallery>> = async {
+        getImageCategoriesUseCase()
+            .getOrDefault(emptyList())
+            .map {
+                galleryFactory.galleryTypeToImageGallery(GalleryType.Category(listOf(it)))
+            }
+    }
+
+    private fun CoroutineScope.getCatBreedsAsync(): Deferred<List<ImageGallery>> = async {
+        getCatBreedsUseCase()
+            .getOrDefault(emptyList())
+            .map {
+                galleryFactory.galleryTypeToImageGallery(GalleryType.Breed(it))
+            }
     }
 
     private fun addDefaultImageGalleries() {

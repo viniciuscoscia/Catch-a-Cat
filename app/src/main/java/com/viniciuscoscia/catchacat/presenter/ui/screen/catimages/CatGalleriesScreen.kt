@@ -4,9 +4,7 @@ package com.viniciuscoscia.catchacat.presenter.ui.screen.catimages
 
 import android.os.Build
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.rememberScaffoldState
@@ -56,11 +54,11 @@ fun CatGalleriesScreen(
                 } else {
                     VerticalPager(
                         count = imageGalleries.size,
-                        state = pagerState
+                        state = pagerState,
                     ) { index ->
                         imageGalleries[index].apply {
                             CatImageCarousel(
-                                title = galleryType.displayName,
+                                title = galleryType.getDisplayName(),
                                 catImages = images.collectAsLazyPagingItems()
                             )
                         }
@@ -82,6 +80,7 @@ private fun CatImageCarousel(
     Column(modifier = Modifier.fillMaxSize()) {
         Text(text = title)
         HorizontalPager(
+            modifier = Modifier.fillMaxSize(),
             count = catImages.itemCount,
             state = pagerState
         ) { page ->
@@ -89,7 +88,7 @@ private fun CatImageCarousel(
                 CatCard(
                     catImage = it,
                     modifier = Modifier
-                        .fillMaxSize()
+                        .fillMaxWidth()
                         .clickable { onCatImageClicked?.invoke(it.id) }
                 )
             }
@@ -102,7 +101,11 @@ private fun CatCard(
     catImage: CatImage,
     modifier: Modifier = Modifier
 ) {
-    Column(modifier = modifier.fillMaxSize()) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth(),
+        verticalArrangement = Arrangement.Center
+    ) {
         CatImageLoader(
             imageUrl = catImage.url,
             imageLoader = ImageLoader.Builder(LocalContext.current)
@@ -113,8 +116,7 @@ private fun CatCard(
                         add(GifDecoder.Factory())
                     }
                 }.build(),
-            modifier = Modifier
-                .fillMaxSize(),
+            modifier = modifier,
             contentScale = ContentScale.Fit
         )
     }
