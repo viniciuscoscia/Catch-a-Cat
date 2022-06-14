@@ -34,6 +34,8 @@ class CatGalleriesViewModel(
             .forEach {
                 Timber.d("Added gallery: $it")
                 _imageGalleries.add(it)
+            }.also {
+                // TODO Hide Loading
             }
     }
 
@@ -41,7 +43,7 @@ class CatGalleriesViewModel(
         getImageCategoriesUseCase()
             .getOrDefault(emptyList())
             .map {
-                galleryFactory.galleryTypeToImageGallery(GalleryType.Category(listOf(it)))
+                galleryFactory.galleryTypeToImageGallery(GalleryType.Category(it))
             }
     }
 

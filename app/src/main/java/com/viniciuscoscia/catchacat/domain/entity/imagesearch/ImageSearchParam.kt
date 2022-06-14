@@ -38,6 +38,11 @@ sealed class ImageSearchParam(paramName: ImageSearchParamName) {
         value = page
     )
 
+    class CategoryIds(category: Int) : ImageSearchIntParam(
+        paramName = ImageSearchParamName.CATEGORY_IDS,
+        value = category
+    )
+
     class MimeType(mimeTypes: List<MimeTypes>) : ImageSearchStringListParam(
         paramName = ImageSearchParamName.MIME_TYPES,
         value = mimeTypes.map {
@@ -45,20 +50,7 @@ sealed class ImageSearchParam(paramName: ImageSearchParamName) {
         }
     )
 
-    class CategoryIds(categories: List<Int>) : ImageSearchIntListParam(
-        paramName = ImageSearchParamName.CATEGORY_IDS,
-        value = categories
-    )
-
     abstract fun toMap(): Map<String, List<String>>
-}
-
-sealed class ImageSearchIntListParam(
-    paramName: ImageSearchParamName,
-    val value: List<Int>
-) : ImageSearchParam(paramName) {
-    override fun toMap(): Map<String, List<String>> =
-        hashMapOf(Pair(paramName, value.map { it.toString() }))
 }
 
 sealed class ImageSearchStringListParam(

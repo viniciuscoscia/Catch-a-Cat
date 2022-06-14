@@ -19,11 +19,8 @@ sealed interface GalleryType {
             "Breed: ${breedModel.name.lowercase().replaceFirstChar { it.uppercase() }} >"
     }
 
-    /*
-     * Category as a list because a request can take more than one category type
-     */
-    data class Category(val categoryUIModel: List<CatImageCategory>) : GalleryType {
+    data class Category(val categoryUIModel: CatImageCategory) : GalleryType {
         override fun getDisplayName() =
-            "Category: ${categoryUIModel.map { it.name }.joinToString { ", " }}"
+            "Category: ${categoryUIModel.name}}"
     }
 }

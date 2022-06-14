@@ -6,7 +6,6 @@ import android.os.Build
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -23,6 +22,7 @@ import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.VerticalPager
 import com.google.accompanist.pager.rememberPagerState
 import com.viniciuscoscia.catchacat.domain.entity.CatImage
+import com.viniciuscoscia.catchacat.presenter.ui.component.TextFields
 import com.viniciuscoscia.catchacat.presenter.ui.component.image.CatImageLoader
 import com.viniciuscoscia.catchacat.presenter.ui.component.loading.LoadingBox
 import com.viniciuscoscia.catchacat.presenter.ui.model.ImageGallery
@@ -46,25 +46,32 @@ fun CatGalleriesScreen(
                     .fillMaxSize()
                     .padding(paddingValues)
             ) {
-                val pagerState = rememberPagerState()
                 val imageGalleries: List<ImageGallery> = viewModel.imageGalleries
 
                 if (imageGalleries.isEmpty()) {
                     LoadingBox(modifier = Modifier.fillMaxSize())
-                } else {
-                    VerticalPager(
-                        count = imageGalleries.size,
-                        state = pagerState,
-                    ) { index ->
-                        imageGalleries[index].apply {
-                            CatImageCarousel(
-                                title = galleryType.getDisplayName(),
-                                catImages = images.collectAsLazyPagingItems()
-                            )
-                        }
-                    }
+                    return@Column
                 }
+
+                GalleriesVerticalPager(imageGalleries)
             }
+        }
+    }
+}
+
+@Composable
+private fun GalleriesVerticalPager(imageGalleries: List<ImageGallery>) {
+    val pagerState = rememberPagerState()
+
+    VerticalPager(
+        count = imageGalleries.size,
+        state = pagerState,
+    ) { index ->
+        imageGalleries[index].apply {
+            CatImageCarousel(
+                title = galleryType.getDisplayName(),
+                catImages = images.collectAsLazyPagingItems()
+            )
         }
     }
 }
@@ -78,7 +85,7 @@ private fun CatImageCarousel(
     val pagerState = rememberPagerState()
 
     Column(modifier = Modifier.fillMaxSize()) {
-        Text(text = title)
+        TextFields.Title(text = title)
         HorizontalPager(
             modifier = Modifier.fillMaxSize(),
             count = catImages.itemCount,
