@@ -1,4 +1,4 @@
-package com.viniciuscoscia.catchacat.presenter.ui.model.factory
+package com.viniciuscoscia.catchacat.presenter.ui.model.imagegallery
 
 import androidx.paging.cachedIn
 import com.viniciuscoscia.catchacat.data.paging.CatImagesSearchPager
@@ -6,7 +6,6 @@ import com.viniciuscoscia.catchacat.domain.entity.imagesearch.ImageSearchParam
 import com.viniciuscoscia.catchacat.domain.entity.imagesearch.params.MimeTypes
 import com.viniciuscoscia.catchacat.presenter.ui.model.GalleryType
 import com.viniciuscoscia.catchacat.presenter.ui.model.GalleryType.*
-import com.viniciuscoscia.catchacat.presenter.ui.model.ImageGallery
 import com.viniciuscoscia.catchacat.presenter.util.addAll
 import kotlinx.coroutines.CoroutineScope
 

@@ -25,7 +25,7 @@ import com.viniciuscoscia.catchacat.domain.entity.CatImage
 import com.viniciuscoscia.catchacat.presenter.ui.component.TextFields
 import com.viniciuscoscia.catchacat.presenter.ui.component.image.CatImageLoader
 import com.viniciuscoscia.catchacat.presenter.ui.component.loading.LoadingBox
-import com.viniciuscoscia.catchacat.presenter.ui.model.ImageGallery
+import com.viniciuscoscia.catchacat.presenter.ui.model.imagegallery.ImageGallery
 import com.viniciuscoscia.catchacat.presenter.ui.theme.CatchACatTheme
 import org.koin.androidx.compose.getViewModel
 
