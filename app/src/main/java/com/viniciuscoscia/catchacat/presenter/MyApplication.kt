@@ -5,6 +5,7 @@ import com.viniciuscoscia.catchacat.BuildConfig
 import com.viniciuscoscia.catchacat.data.di.dataModule
 import com.viniciuscoscia.catchacat.domain.di.domainModule
 import com.viniciuscoscia.catchacat.presenter.di.presenterModule
+import com.viniciuscoscia.catchacat.presenter.ui.screen.playground.Playground
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -22,5 +23,6 @@ class MyApplication : Application() {
             androidLogger(Level.ERROR)
             modules(presenterModule + dataModule + domainModule)
         }
+        Playground()
     }
 }
