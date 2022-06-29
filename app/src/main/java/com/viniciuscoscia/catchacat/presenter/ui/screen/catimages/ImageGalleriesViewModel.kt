@@ -3,15 +3,23 @@ package com.viniciuscoscia.catchacat.presenter.ui.screen.catimages
 import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.viniciuscoscia.catchacat.presenter.navigation.Screen
 import com.viniciuscoscia.catchacat.presenter.ui.model.GalleryType
+import com.viniciuscoscia.catchacat.presenter.ui.model.UIEvents
 import com.viniciuscoscia.catchacat.presenter.ui.model.imagegallery.ImageGallery
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 class ImageGalleriesViewModel(
     private val galleriesGenerator: GalleriesGenerator,
 ) : ViewModel() {
     private val _imageGalleries = mutableStateListOf<ImageGallery>()
     val imageGalleries: List<ImageGallery> = _imageGalleries
+
+    private val _uiEvents = Channel<UIEvents>()
+    val uiEvents = _uiEvents.receiveAsFlow()
 
     init {
         viewModelScope.launch {
@@ -22,11 +30,13 @@ class ImageGalleriesViewModel(
     }
 
     fun onGalleryTitleClicked(galleryType: GalleryType) {
-
-    }
-
-    sealed interface ScreenEvents {
-        data class ShowSnackbar(val message: String) : ScreenEvents
-        data class Navigate(val route: String) : ScreenEvents
+        when (galleryType) {
+            is GalleryType.Breed -> {
+                _uiEvents.trySend(UIEvents.Navigate(Screen.CatBreedDetails(galleryType.getId())))
+            }
+            else -> {
+                Timber.d("Clicked on title for gallery type: ${galleryType.getDisplayName()}")
+            }
+        }
     }
 }

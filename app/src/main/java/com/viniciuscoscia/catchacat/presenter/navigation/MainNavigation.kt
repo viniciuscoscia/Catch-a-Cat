@@ -1,20 +1,25 @@
 package com.viniciuscoscia.catchacat.presenter.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import com.viniciuscoscia.catchacat.presenter.ui.screen.catimages.GalleriesScreen
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 @Composable
-fun NavigationComponent(navController: NavHostController) {
+fun NavigationComponent(navController: NavHostController, navigator: Navigator) {
+    LaunchedEffect(true) {
+        navigator.navigationChannel.onEach {
+            navController.navigate(it.route)
+        }.launchIn(this)
+    }
+
     NavHost(
         navController = navController,
         startDestination = Screen.MainScreen.route
     ) {
-        composable(route = Screen.MainScreen.route) {
-            GalleriesScreen(navController = navController)
-        }
+        galleriesScreenRoute(navigator)
 
 //        composable(
 //            route = Screen.TVShowDetailsScreen.route + "/{$showIdArg}",
@@ -29,9 +34,4 @@ fun NavigationComponent(navController: NavHostController) {
 //            TVShowDetailsScreen(navController, entry.arguments!!.getInt(showIdArg, 0))
 //        }
     }
-}
-
-sealed class Screen(val route: String) {
-    object MainScreen : Screen("main_screen")
-    object CatBreedDetails : Screen("cat_breed_details_screen")
 }

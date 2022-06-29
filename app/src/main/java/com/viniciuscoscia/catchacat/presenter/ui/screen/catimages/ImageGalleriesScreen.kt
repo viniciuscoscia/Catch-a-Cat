@@ -6,6 +6,7 @@ import android.os.Build
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Scaffold
+import androidx.compose.material.ScaffoldState
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -13,7 +14,7 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.navigation.NavHostController
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import coil.ImageLoader
@@ -30,16 +31,14 @@ import com.viniciuscoscia.catchacat.presenter.ui.component.loading.LoadingBox
 import com.viniciuscoscia.catchacat.presenter.ui.model.GalleryType
 import com.viniciuscoscia.catchacat.presenter.ui.model.imagegallery.ImageGallery
 import com.viniciuscoscia.catchacat.presenter.ui.theme.CatchACatTheme
-import org.koin.androidx.compose.getViewModel
 
 @Composable
-fun GalleriesScreen(
-    navController: NavHostController,
-    viewModel: ImageGalleriesViewModel = getViewModel()
+fun ImageGalleriesScreen(
+    imageGalleries: List<ImageGallery>,
+    onTitleClicked: ((GalleryType) -> Unit),
+    scaffoldState: ScaffoldState = rememberScaffoldState()
 ) {
     CatchACatTheme {
-        val scaffoldState = rememberScaffoldState()
-
         Scaffold(
             modifier = Modifier.fillMaxSize(),
             scaffoldState = scaffoldState
@@ -49,8 +48,6 @@ fun GalleriesScreen(
                     .fillMaxSize()
                     .padding(paddingValues)
             ) {
-                val imageGalleries: List<ImageGallery> = viewModel.imageGalleries
-
                 if (imageGalleries.isEmpty()) {
                     LoadingBox(modifier = Modifier.fillMaxSize())
                     return@Column
@@ -59,7 +56,7 @@ fun GalleriesScreen(
                 GalleriesVerticalPager(
                     imageGalleries = imageGalleries,
                     onTitleClicked = {
-                        viewModel.onGalleryTitleClicked(it)
+                        onTitleClicked(it)
                     }
                 )
             }
@@ -147,4 +144,13 @@ private fun CatImageCard(
             contentScale = ContentScale.Fit
         )
     }
+}
+
+@Preview
+@Composable
+private fun ImageGalleriesScreenPreview() {
+    ImageGalleriesScreen(
+        imageGalleries = listOf(),
+        onTitleClicked = {}
+    )
 }
