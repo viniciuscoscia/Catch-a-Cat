@@ -3,14 +3,14 @@
 package com.viniciuscoscia.catchacat.presenter.di
 
 import com.viniciuscoscia.catchacat.data.paging.CatImagesSearchPager
-import com.viniciuscoscia.catchacat.presenter.ui.screen.catimages.CatGalleriesViewModel
 import com.viniciuscoscia.catchacat.presenter.ui.screen.catimages.GalleriesGenerator
+import com.viniciuscoscia.catchacat.presenter.ui.screen.catimages.ImageGalleriesViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val presenterModule = module {
     viewModel {
-        CatGalleriesViewModel(
+        ImageGalleriesViewModel(
             galleriesGenerator = GalleriesGenerator(
                 getCatBreedsUseCase = get(),
                 getImageCategoriesUseCase = get(),

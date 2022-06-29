@@ -1,4 +1,5 @@
 object Versions {
+    const val amplify = "1.36.0"
     const val composePager = "0.24.12-rc"
     const val androidAppCompat = "1.4.1"
     const val androidExtJUnit = "1.1.3"
@@ -28,6 +29,8 @@ object Versions {
 
 object Libs {
     const val activityCompose = "androidx.activity:activity-compose:${Versions.activityCompose}"
+    const val amplify = "com.amplifyframework:core:${Versions.amplify}"
+    const val amplifyCognito = "com.amplifyframework:aws-auth-cognito:${Versions.amplify}"
     const val androidAppCompat = "androidx.appcompat:appcompat:${Versions.androidAppCompat}"
     const val androidMaterial = "com.google.android.material:material:${Versions.androidMaterial}"
     const val androidExtJUnit = "androidx.test.ext:junit:${Versions.androidExtJUnit}"

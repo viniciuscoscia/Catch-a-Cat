@@ -5,7 +5,6 @@ import com.viniciuscoscia.catchacat.data.paging.CatImagesSearchPager
 import com.viniciuscoscia.catchacat.domain.entity.imagesearch.ImageSearchParam
 import com.viniciuscoscia.catchacat.domain.entity.imagesearch.params.MimeTypes
 import com.viniciuscoscia.catchacat.presenter.ui.model.GalleryType
-import com.viniciuscoscia.catchacat.presenter.ui.model.GalleryType.*
 import com.viniciuscoscia.catchacat.presenter.util.addAll
 import kotlinx.coroutines.CoroutineScope
 
@@ -21,7 +20,7 @@ class ImageGalleryFactory(
         images = imagesSearchPager.searchForPagingImages(
             searchParams = arrayListOf(
                 when (galleryType) {
-                    is RandomImages -> {
+                    GalleryType.RandomImages -> {
                         ImageSearchParam.MimeType(
                             mimeTypes = listOf(
                                 MimeTypes.JPG,
@@ -29,21 +28,21 @@ class ImageGalleryFactory(
                             )
                         )
                     }
-                    is RandomGifs -> {
+                    GalleryType.RandomGifs -> {
                         ImageSearchParam.MimeType(
                             mimeTypes = listOf(
                                 MimeTypes.GIF,
                             )
                         )
                     }
-                    is Breed -> {
+                    is GalleryType.Breed -> {
                         ImageSearchParam.BreedId(
                             breedId = galleryType.breedModel.id
                         )
                     }
-                    is Category -> {
+                    is GalleryType.Category -> {
                         ImageSearchParam.CategoryIds(
-                            category = galleryType.categoryUIModel.id
+                            category = galleryType.categoryUIModel.id.toInt()
                         )
                     }
                 }

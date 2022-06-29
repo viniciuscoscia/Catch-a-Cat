@@ -17,7 +17,7 @@ import coil.compose.SubcomposeAsyncImageContent
 import com.viniciuscoscia.catchacat.R
 
 @Composable
-fun CatImageLoader(
+fun CatLoader(
     imageUrl: String?,
     modifier: Modifier = Modifier,
     imageLoader: ImageLoader,

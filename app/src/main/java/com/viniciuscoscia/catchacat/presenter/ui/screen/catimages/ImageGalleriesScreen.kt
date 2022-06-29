@@ -8,6 +8,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -23,16 +25,17 @@ import com.google.accompanist.pager.VerticalPager
 import com.google.accompanist.pager.rememberPagerState
 import com.viniciuscoscia.catchacat.domain.entity.CatImage
 import com.viniciuscoscia.catchacat.presenter.ui.component.TextFields
-import com.viniciuscoscia.catchacat.presenter.ui.component.image.CatImageLoader
+import com.viniciuscoscia.catchacat.presenter.ui.component.image.CatLoader
 import com.viniciuscoscia.catchacat.presenter.ui.component.loading.LoadingBox
+import com.viniciuscoscia.catchacat.presenter.ui.model.GalleryType
 import com.viniciuscoscia.catchacat.presenter.ui.model.imagegallery.ImageGallery
 import com.viniciuscoscia.catchacat.presenter.ui.theme.CatchACatTheme
 import org.koin.androidx.compose.getViewModel
 
 @Composable
-fun CatGalleriesScreen(
+fun GalleriesScreen(
     navController: NavHostController,
-    viewModel: CatGalleriesViewModel = getViewModel()
+    viewModel: ImageGalleriesViewModel = getViewModel()
 ) {
     CatchACatTheme {
         val scaffoldState = rememberScaffoldState()
@@ -53,50 +56,11 @@ fun CatGalleriesScreen(
                     return@Column
                 }
 
-                GalleriesVerticalPager(imageGalleries)
-            }
-        }
-    }
-}
-
-@Composable
-private fun GalleriesVerticalPager(imageGalleries: List<ImageGallery>) {
-    val pagerState = rememberPagerState()
-
-    VerticalPager(
-        count = imageGalleries.size,
-        state = pagerState,
-    ) { index ->
-        imageGalleries[index].apply {
-            CatImageCarousel(
-                title = galleryType.getDisplayName(),
-                catImages = images.collectAsLazyPagingItems()
-            )
-        }
-    }
-}
-
-@Composable
-private fun CatImageCarousel(
-    title: String,
-    catImages: LazyPagingItems<CatImage>,
-    onCatImageClicked: ((imageId: String) -> Unit)? = null
-) {
-    val pagerState = rememberPagerState()
-
-    Column(modifier = Modifier.fillMaxSize()) {
-        TextFields.Title(text = title)
-        HorizontalPager(
-            modifier = Modifier.fillMaxSize(),
-            count = catImages.itemCount,
-            state = pagerState
-        ) { page ->
-            catImages[page]?.let {
-                CatCard(
-                    catImage = it,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .clickable { onCatImageClicked?.invoke(it.id) }
+                GalleriesVerticalPager(
+                    imageGalleries = imageGalleries,
+                    onTitleClicked = {
+                        viewModel.onGalleryTitleClicked(it)
+                    }
                 )
             }
         }
@@ -104,7 +68,63 @@ private fun CatImageCarousel(
 }
 
 @Composable
-private fun CatCard(
+private fun GalleriesVerticalPager(
+    imageGalleries: List<ImageGallery>,
+    onTitleClicked: ((GalleryType) -> Unit)
+) {
+    val pagerState = rememberPagerState()
+
+    VerticalPager(
+        count = imageGalleries.size,
+        state = pagerState,
+    ) { index ->
+        imageGalleries[index].apply {
+            ImageCarousel(
+                galleryType = galleryType,
+                images = images.collectAsLazyPagingItems(),
+                onTitleClicked = { onTitleClicked.invoke(galleryType) }
+            )
+        }
+    }
+}
+
+@Composable
+private fun ImageCarousel(
+    galleryType: GalleryType,
+    images: LazyPagingItems<CatImage>,
+    onImageClicked: (() -> Unit)? = null,
+    onTitleClicked: (() -> Unit)? = null
+) {
+    val pagerState = rememberPagerState()
+    val updatedOnImageClicked by rememberUpdatedState(newValue = onImageClicked)
+    val updatedOnTitleClicked by rememberUpdatedState(newValue = onTitleClicked)
+
+    Column(modifier = Modifier.fillMaxSize()) {
+        TextFields.Title(
+            text = galleryType.getDisplayName(),
+            modifier = Modifier.clickable {
+                updatedOnTitleClicked?.invoke()
+            }
+        )
+        HorizontalPager(
+            modifier = Modifier.fillMaxSize(),
+            count = images.itemCount,
+            state = pagerState
+        ) { page ->
+            images[page]?.let {
+                CatImageCard(
+                    catImage = it,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable { updatedOnImageClicked?.invoke() }
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun CatImageCard(
     catImage: CatImage,
     modifier: Modifier = Modifier
 ) {
@@ -113,7 +133,7 @@ private fun CatCard(
             .fillMaxWidth(),
         verticalArrangement = Arrangement.Center
     ) {
-        CatImageLoader(
+        CatLoader(
             imageUrl = catImage.url,
             imageLoader = ImageLoader.Builder(LocalContext.current)
                 .components {

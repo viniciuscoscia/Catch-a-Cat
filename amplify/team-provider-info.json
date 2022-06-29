@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-catchacat-dev-143303-authRole",
+      "UnauthRoleArn": "arn:aws:iam::974675774953:role/amplify-catchacat-dev-143303-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::974675774953:role/amplify-catchacat-dev-143303-authRole",
+      "Region": "sa-east-1",
+      "DeploymentBucketName": "amplify-catchacat-dev-143303-deployment",
+      "UnauthRoleName": "amplify-catchacat-dev-143303-unauthRole",
+      "StackName": "amplify-catchacat-dev-143303",
+      "StackId": "arn:aws:cloudformation:sa-east-1:974675774953:stack/amplify-catchacat-dev-143303/58c07650-f708-11ec-9da1-0668bd1ae692",
+      "AmplifyAppId": "d25kkijsojcsb"
+    },
+    "categories": {
+      "auth": {
+        "catchacatb45f6a57": {}
+      }
+    }
+  }
+}

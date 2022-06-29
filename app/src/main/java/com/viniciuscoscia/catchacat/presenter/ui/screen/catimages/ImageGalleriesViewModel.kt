@@ -3,10 +3,11 @@ package com.viniciuscoscia.catchacat.presenter.ui.screen.catimages
 import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.viniciuscoscia.catchacat.presenter.ui.model.GalleryType
 import com.viniciuscoscia.catchacat.presenter.ui.model.imagegallery.ImageGallery
 import kotlinx.coroutines.launch
 
-class CatGalleriesViewModel(
+class ImageGalleriesViewModel(
     private val galleriesGenerator: GalleriesGenerator,
 ) : ViewModel() {
     private val _imageGalleries = mutableStateListOf<ImageGallery>()
@@ -18,6 +19,10 @@ class CatGalleriesViewModel(
                 _imageGalleries.add(it)
             }
         }
+    }
+
+    fun onGalleryTitleClicked(galleryType: GalleryType) {
+
     }
 
     sealed interface ScreenEvents {

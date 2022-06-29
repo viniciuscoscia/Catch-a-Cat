@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.viniciuscoscia.catchacat.presenter.ui.screen.catimages.CatGalleriesScreen
+import com.viniciuscoscia.catchacat.presenter.ui.screen.catimages.GalleriesScreen
 
 @Composable
 fun NavigationComponent(navController: NavHostController) {
@@ -13,7 +13,7 @@ fun NavigationComponent(navController: NavHostController) {
         startDestination = Screen.MainScreen.route
     ) {
         composable(route = Screen.MainScreen.route) {
-            CatGalleriesScreen(navController = navController)
+            GalleriesScreen(navController = navController)
         }
 
 //        composable(
