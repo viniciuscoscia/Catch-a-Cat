@@ -2,6 +2,7 @@ package com.viniciuscoscia.catchacat.presenter.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import kotlinx.coroutines.flow.launchIn
@@ -20,7 +21,11 @@ fun NavigationComponent(navController: NavHostController, navigator: Navigator) 
         startDestination = Screen.MainScreen.route
     ) {
         galleriesScreenRoute(navigator)
+        breedDetailsScreenRoute(navigator)
+    }
+}
 
+fun NavGraphBuilder.breedDetailsScreenRoute(navigator: Navigator) {
 //        composable(
 //            route = Screen.TVShowDetailsScreen.route + "/{$showIdArg}",
 //            arguments = listOf(
@@ -33,5 +38,4 @@ fun NavigationComponent(navController: NavHostController, navigator: Navigator) 
 //        ) { entry ->
 //            TVShowDetailsScreen(navController, entry.arguments!!.getInt(showIdArg, 0))
 //        }
-    }
 }
