@@ -10,6 +10,6 @@ class Navigator {
 
     fun navigateTo(screen: Screen) {
         Timber.d("Navigating to $screen")
-        _navigationChannel.trySend(screen.route)
+        _navigationChannel.trySend(screen.buildRoute())
     }
 }

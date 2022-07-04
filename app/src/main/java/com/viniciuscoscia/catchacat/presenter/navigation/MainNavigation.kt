@@ -17,7 +17,7 @@ fun NavigationComponent(navController: NavHostController, navigator: Navigator) 
 
     NavHost(
         navController = navController,
-        startDestination = Screen.ImageGallery.route
+        startDestination = Screen.ImageGallery.ROUTE
     ) {
         galleriesScreenRoute(navigator)
         breedDetailsScreenRoute(navigator)

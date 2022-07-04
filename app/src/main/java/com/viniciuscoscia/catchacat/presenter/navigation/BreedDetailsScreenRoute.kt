@@ -6,8 +6,8 @@ import com.viniciuscoscia.catchacat.presenter.ui.screen.breeddetails.BreedDetail
 
 fun NavGraphBuilder.breedDetailsScreenRoute(navigator: Navigator) {
     composable(
-        route = Screen.BreedDetails.route,
-        arguments = listOf(Screen.BreedDetails.breedIdNavArgument)
+        route = Screen.BreedDetails.ROUTE,
+        arguments = listOf(Screen.BreedDetails.NavArgs.breedId)
     ) { entry ->
 //        val viewModel = getViewModel<ImageGalleriesViewModel>()
 //        val scaffoldState = rememberScaffoldState()
@@ -29,7 +29,7 @@ fun NavGraphBuilder.breedDetailsScreenRoute(navigator: Navigator) {
 //        }
 
         entry.arguments?.let { bundle ->
-            val breedId = bundle.getString(Screen.BreedDetails.breedIdNavArgument.name, "0")
+            val breedId = bundle.getString(Screen.BreedDetails.NavArgs.breedId.name, "0")
             BreedDetailsScreen(breedId = breedId)
         }
     }
