@@ -29,7 +29,7 @@ private class CatImagesPagingSource(
             params.key ?: STARTING_PAGE_INDEX
         }
 
-        val result = catRepository.getCatImages(pageIndex, searchParams)
+        val result = catRepository.getImages(pageIndex, searchParams)
 
         return if (result.isSuccess && result.getOrNull() != null) {
             LoadResult.Page(

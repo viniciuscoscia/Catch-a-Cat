@@ -12,7 +12,7 @@ val presenterModule = module {
     viewModel {
         ImageGalleriesViewModel(
             galleriesGenerator = GalleriesGenerator(
-                getCatBreedsUseCase = get(),
+                getBreedsUseCase = get(),
                 getImageCategoriesUseCase = get(),
                 imagesSearchPager = get()
             )

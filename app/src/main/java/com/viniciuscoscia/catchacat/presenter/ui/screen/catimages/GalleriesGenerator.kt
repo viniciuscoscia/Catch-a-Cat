@@ -1,7 +1,7 @@
 package com.viniciuscoscia.catchacat.presenter.ui.screen.catimages
 
 import com.viniciuscoscia.catchacat.data.paging.CatImagesSearchPager
-import com.viniciuscoscia.catchacat.domain.usecase.GetCatBreedsUseCase
+import com.viniciuscoscia.catchacat.domain.usecase.GetBreedsUseCase
 import com.viniciuscoscia.catchacat.domain.usecase.GetImageCategoriesUseCase
 import com.viniciuscoscia.catchacat.presenter.ui.model.GalleryType
 import com.viniciuscoscia.catchacat.presenter.ui.model.imagegallery.ImageGallery
@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.channelFlow
 
 class GalleriesGenerator(
-    private val getCatBreedsUseCase: GetCatBreedsUseCase,
+    private val getBreedsUseCase: GetBreedsUseCase,
     private val getImageCategoriesUseCase: GetImageCategoriesUseCase,
     private val imagesSearchPager: CatImagesSearchPager
 ) {
@@ -61,7 +61,7 @@ class GalleriesGenerator(
 
     private fun CoroutineScope.getCatBreedsAsync(galleryFactory: ImageGalleryFactory): Deferred<List<ImageGallery>> =
         async(Dispatchers.IO) {
-            getCatBreedsUseCase()
+            getBreedsUseCase()
                 .getOrDefault(emptyList())
                 .map {
                     galleryFactory.galleryTypeToImageGallery(GalleryType.Breed(it))

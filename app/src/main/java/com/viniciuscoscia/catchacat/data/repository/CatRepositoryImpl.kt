@@ -4,7 +4,7 @@ import com.viniciuscoscia.catchacat.data.remote.datasource.BreedRemoteDataSource
 import com.viniciuscoscia.catchacat.data.remote.datasource.CategoriesRemoteSource
 import com.viniciuscoscia.catchacat.data.remote.datasource.ImageRemoteDataSource
 import com.viniciuscoscia.catchacat.data.remote.entity.toDomain
-import com.viniciuscoscia.catchacat.domain.entity.CatBreed
+import com.viniciuscoscia.catchacat.domain.entity.Breed
 import com.viniciuscoscia.catchacat.domain.entity.CatImage
 import com.viniciuscoscia.catchacat.domain.entity.CatImageCategory
 import com.viniciuscoscia.catchacat.domain.entity.imagesearch.ImageSearchParam
@@ -17,7 +17,7 @@ class CatRepositoryImpl(
     private val breedRemoteSource: BreedRemoteDataSource,
     private val categoriesRemoteSource: CategoriesRemoteSource
 ) : CatRepository {
-    override suspend fun getCatImages(
+    override suspend fun getImages(
         page: Int,
         searchParams: List<ImageSearchParam>?
     ): Result<List<CatImage>> = withContext(Dispatchers.IO) {
@@ -33,7 +33,7 @@ class CatRepositoryImpl(
         }
     }
 
-    override suspend fun getCatBreeds(): Result<List<CatBreed>> {
+    override suspend fun getBreeds(): Result<List<Breed>> {
         return runCatching {
             breedRemoteSource.getCatBreeds().toDomain().filterNotNull()
         }

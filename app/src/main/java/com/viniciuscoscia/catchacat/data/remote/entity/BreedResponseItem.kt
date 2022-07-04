@@ -1,6 +1,6 @@
 package com.viniciuscoscia.catchacat.data.remote.entity
 
-import com.viniciuscoscia.catchacat.domain.entity.CatBreed
+import com.viniciuscoscia.catchacat.domain.entity.Breed
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -67,10 +67,10 @@ data class BreedResponseItem(
     val wikipediaUrl: String?
 )
 
-fun BreedResponseItem.toDomain(): CatBreed? {
+fun BreedResponseItem.toDomain(): Breed? {
     if (id == null || name == null) return null
 
-    return CatBreed(
+    return Breed(
         id = id,
         name = name,
         adaptability = adaptability,

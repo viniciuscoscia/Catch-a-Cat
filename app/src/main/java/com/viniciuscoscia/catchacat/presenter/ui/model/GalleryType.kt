@@ -1,6 +1,5 @@
 package com.viniciuscoscia.catchacat.presenter.ui.model
 
-import com.viniciuscoscia.catchacat.domain.entity.CatBreed
 import com.viniciuscoscia.catchacat.domain.entity.CatImageCategory
 
 sealed interface GalleryType {
@@ -17,7 +16,8 @@ sealed interface GalleryType {
         override fun getId(): String? = null
     }
 
-    data class Breed(val breedModel: CatBreed) : GalleryType {
+    data class Breed(val breedModel: com.viniciuscoscia.catchacat.domain.entity.Breed) :
+        GalleryType {
         override fun getDisplayName() =
             "Breed: ${breedModel.name.lowercase().replaceFirstChar { it.uppercase() }} >"
 

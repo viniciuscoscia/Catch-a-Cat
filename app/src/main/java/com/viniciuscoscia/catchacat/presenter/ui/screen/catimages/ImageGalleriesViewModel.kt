@@ -32,7 +32,7 @@ class ImageGalleriesViewModel(
     fun onGalleryTitleClicked(galleryType: GalleryType) {
         when (galleryType) {
             is GalleryType.Breed -> {
-                _uiEvents.trySend(UIEvents.Navigate(Screen.CatBreedDetails(galleryType.getId())))
+                _uiEvents.trySend(UIEvents.Navigate(Screen.BreedDetails(breedId = galleryType.getId())))
             }
             else -> {
                 Timber.d("Clicked on title for gallery type: ${galleryType.getDisplayName()}")

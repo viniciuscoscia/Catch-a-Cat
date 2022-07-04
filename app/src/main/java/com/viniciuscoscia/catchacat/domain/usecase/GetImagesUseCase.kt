@@ -5,19 +5,19 @@ import com.viniciuscoscia.catchacat.domain.entity.imagesearch.ImageSearchParam
 import com.viniciuscoscia.catchacat.domain.repository.CatRepository
 import timber.log.Timber
 
-class GetCatImagesUseCaseImpl(private val catRepository: CatRepository) : GetCatImagesUseCase {
+class GetImagesUseCaseImpl(private val catRepository: CatRepository) : GetImagesUseCase {
     override suspend operator fun invoke(
         page: Int,
         searchParams: List<ImageSearchParam>?
     ): Result<List<CatImage>> {
-        return catRepository.getCatImages(page, searchParams)
+        return catRepository.getImages(page, searchParams)
             .onFailure {
                 Timber.e("Error when getting cat images", it)
             }
     }
 }
 
-interface GetCatImagesUseCase {
+interface GetImagesUseCase {
     suspend operator fun invoke(
         page: Int,
         searchParams: List<ImageSearchParam>? = null

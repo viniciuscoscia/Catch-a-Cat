@@ -27,9 +27,9 @@ class CatchACatApplication : Application() {
         }
         // TODO Clean up this file
         setupKoin()
-        setupAmplify()
-//        fetchAuthSession()
         Playground()
+//        setupAmplify()
+//        fetchAuthSession()
 //        test()
     }
 
