@@ -11,7 +11,7 @@ import org.koin.androidx.compose.getViewModel
 import timber.log.Timber
 
 fun NavGraphBuilder.galleriesScreenRoute(navigator: Navigator) {
-    composable(route = Screen.ImageGallery.ROUTE) {
+    composable(route = Screen.ImageGallery.BASE_ROUTE) {
         val viewModel = getViewModel<ImageGalleriesViewModel>()
         val scaffoldState = rememberScaffoldState()
 //        val coroutineScope = rememberCoroutineScope()
