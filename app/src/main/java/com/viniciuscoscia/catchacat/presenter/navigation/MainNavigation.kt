@@ -1,9 +1,12 @@
+@file:OptIn(ExperimentalAnimationApi::class)
+
 package com.viniciuscoscia.catchacat.presenter.navigation
 
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
+import com.google.accompanist.navigation.animation.AnimatedNavHost
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
@@ -15,7 +18,7 @@ fun NavigationComponent(navController: NavHostController, navigator: Navigator) 
         }.launchIn(this)
     }
 
-    NavHost(
+    AnimatedNavHost(
         navController = navController,
         startDestination = Screen.ImageGallery.route
     ) {

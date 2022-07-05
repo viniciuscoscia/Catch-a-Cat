@@ -9,6 +9,7 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.ScaffoldState
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Modifier
@@ -25,15 +26,45 @@ import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.VerticalPager
 import com.google.accompanist.pager.rememberPagerState
 import com.viniciuscoscia.catchacat.domain.entity.CatImage
+import com.viniciuscoscia.catchacat.presenter.navigation.Navigator
 import com.viniciuscoscia.catchacat.presenter.ui.component.TextFields
 import com.viniciuscoscia.catchacat.presenter.ui.component.image.CatLoader
 import com.viniciuscoscia.catchacat.presenter.ui.component.loading.LoadingBox
 import com.viniciuscoscia.catchacat.presenter.ui.model.GalleryType
+import com.viniciuscoscia.catchacat.presenter.ui.model.UIEvents
 import com.viniciuscoscia.catchacat.presenter.ui.model.imagegallery.ImageGallery
 import com.viniciuscoscia.catchacat.presenter.ui.theme.CatchACatTheme
+import org.koin.androidx.compose.getViewModel
 
 @Composable
-fun ImageGalleriesScreen(
+fun ImageGalleriesScreen(navigator: Navigator) {
+    val viewModel = getViewModel<ImageGalleriesViewModel>()
+    val scaffoldState = rememberScaffoldState()
+
+    LaunchedEffect(true) {
+        viewModel.uiEvents.collect { event ->
+            when (event) {
+                is UIEvents.Navigate -> {
+                    navigator.navigateTo(event.route)
+                }
+                is UIEvents.ShowSnackbar -> {
+                    scaffoldState.snackbarHostState.showSnackbar(event.message)
+                }
+            }
+        }
+    }
+
+    ImageGalleriesBody(
+        imageGalleries = viewModel.imageGalleries,
+        onTitleClicked = {
+            viewModel.onGalleryTitleClicked(it)
+        },
+        scaffoldState = scaffoldState
+    )
+}
+
+@Composable
+fun ImageGalleriesBody(
     imageGalleries: List<ImageGallery>,
     onTitleClicked: ((GalleryType) -> Unit),
     scaffoldState: ScaffoldState = rememberScaffoldState()
@@ -149,7 +180,7 @@ private fun CatImageCard(
 @Preview
 @Composable
 private fun ImageGalleriesScreenPreview() {
-    ImageGalleriesScreen(
+    ImageGalleriesBody(
         imageGalleries = listOf(),
         onTitleClicked = {}
     )

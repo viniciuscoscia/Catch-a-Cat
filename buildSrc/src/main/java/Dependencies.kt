@@ -1,6 +1,6 @@
 object Versions {
     const val amplify = "1.36.0"
-    const val composePager = "0.24.12-rc"
+    const val googleAccompanist = "0.24.13-rc"
     const val androidAppCompat = "1.4.1"
     const val androidExtJUnit = "1.1.3"
     const val androidEspresso = "3.4.0"
@@ -35,8 +35,6 @@ object Libs {
     const val androidMaterial = "com.google.android.material:material:${Versions.androidMaterial}"
     const val androidExtJUnit = "androidx.test.ext:junit:${Versions.androidExtJUnit}"
     const val androidEspresso = "androidx.test.espresso:espresso-core:${Versions.androidEspresso}"
-    const val androidNavigationCompose =
-        "androidx.navigation:navigation-compose:${Versions.navigationCompose}"
     const val coil = "io.coil-kt:coil:${Versions.coil}"
     const val coilGif = "io.coil-kt:coil-gif:${Versions.coil}"
     const val coilCompose = "io.coil-kt:coil-compose:${Versions.coil}"
@@ -47,7 +45,8 @@ object Libs {
     const val composeConstraintLayout =
         "androidx.constraintlayout:constraintlayout-compose:${Versions.composeConstraintLayout}"
     const val composeFoundation = "androidx.compose.foundation:foundation:${Versions.compose}"
-    const val composePager = "com.google.accompanist:accompanist-pager:${Versions.composePager}"
+    const val composePager =
+        "com.google.accompanist:accompanist-pager:${Versions.googleAccompanist}"
     const val composeFoundationLayout =
         "androidx.compose.foundation:foundation-layout:${Versions.compose}"
     const val composeMaterial = "androidx.compose.material:material:${Versions.compose}"
@@ -75,6 +74,10 @@ object Libs {
     const val moshiKotlin = "com.squareup.moshi:moshi-kotlin:${Versions.moshi}"
     const val moshiCodegenKapt = "com.squareup.moshi:moshi-kotlin-codegen:${Versions.moshi}"
     const val multidex = "androidx.multidex:multidex:${Versions.multidex}"
+    const val navigationAnimation =
+        "com.google.accompanist:accompanist-navigation-animation:${Versions.googleAccompanist}"
+    const val navigationCompose =
+        "androidx.navigation:navigation-compose:${Versions.navigationCompose}"
     const val pagingCompose = "androidx.paging:paging-compose:${Versions.pagingCompose}"
     const val roomRuntime = "androidx.room:room-runtime:${Versions.room}"
     const val roomKtx = "androidx.room:room-ktx:${Versions.room}"

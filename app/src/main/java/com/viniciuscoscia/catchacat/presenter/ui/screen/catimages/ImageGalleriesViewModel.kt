@@ -35,6 +35,7 @@ class ImageGalleriesViewModel(
                 _uiEvents.trySend(UIEvents.Navigate(Screen.BreedDetails(breedId = galleryType.getId())))
             }
             else -> {
+                _uiEvents.trySend(UIEvents.ShowSnackbar("Batata doce"))
                 Timber.d("Clicked on title for gallery type: ${galleryType.getDisplayName()}")
             }
         }
