@@ -28,7 +28,7 @@ import com.google.accompanist.pager.rememberPagerState
 import com.viniciuscoscia.catchacat.domain.entity.CatImage
 import com.viniciuscoscia.catchacat.presenter.navigation.Navigator
 import com.viniciuscoscia.catchacat.presenter.ui.component.TextFields
-import com.viniciuscoscia.catchacat.presenter.ui.component.image.CatLoader
+import com.viniciuscoscia.catchacat.presenter.ui.component.image.ImageLoader
 import com.viniciuscoscia.catchacat.presenter.ui.component.loading.LoadingBox
 import com.viniciuscoscia.catchacat.presenter.ui.model.GalleryType
 import com.viniciuscoscia.catchacat.presenter.ui.model.UIEvents
@@ -40,6 +40,8 @@ import org.koin.androidx.compose.getViewModel
 fun ImageGalleriesScreen(navigator: Navigator) {
     val viewModel = getViewModel<ImageGalleriesViewModel>()
     val scaffoldState = rememberScaffoldState()
+
+
 
     LaunchedEffect(true) {
         viewModel.uiEvents.collect { event ->
@@ -161,7 +163,7 @@ private fun CatImageCard(
             .fillMaxWidth(),
         verticalArrangement = Arrangement.Center
     ) {
-        CatLoader(
+        ImageLoader(
             imageUrl = catImage.url,
             imageLoader = ImageLoader.Builder(LocalContext.current)
                 .components {

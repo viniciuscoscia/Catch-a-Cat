@@ -16,7 +16,7 @@ data class CatImagesRequestItem(
 fun CatImagesRequestItem.toDomain() = CatImage(
     id = id,
     url = url,
-    breed = breeds?.firstOrNull()?.toDomain(),
+    catBreed = breeds?.firstOrNull()?.toDomain(),
     categories = categories?.map { it.toDomain() }
 )
 

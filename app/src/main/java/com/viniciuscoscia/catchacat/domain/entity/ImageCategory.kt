@@ -1,6 +1,6 @@
 package com.viniciuscoscia.catchacat.domain.entity
 
-data class CatImageCategory(
+data class ImageCategory(
     val id: String,
     val name: String
 )

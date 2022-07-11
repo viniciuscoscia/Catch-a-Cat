@@ -1,12 +1,12 @@
 package com.viniciuscoscia.catchacat.presenter.ui.model
 
-import com.viniciuscoscia.catchacat.domain.entity.Breed
+import com.viniciuscoscia.catchacat.domain.entity.CatBreed
 
 data class BreedUiModel(val id: String, val name: String)
 
-fun Breed.toUiModel() = BreedUiModel(
+fun CatBreed.toUiModel() = BreedUiModel(
     id = id,
     name = name
 )
 
-fun List<Breed>.toUIModel() = map { it.toUiModel() }
+fun List<CatBreed>.toUIModel() = map { it.toUiModel() }

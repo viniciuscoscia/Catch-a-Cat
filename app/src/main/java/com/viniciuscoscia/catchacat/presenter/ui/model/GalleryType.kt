@@ -1,6 +1,7 @@
 package com.viniciuscoscia.catchacat.presenter.ui.model
 
-import com.viniciuscoscia.catchacat.domain.entity.CatImageCategory
+import com.viniciuscoscia.catchacat.domain.entity.CatBreed
+import com.viniciuscoscia.catchacat.domain.entity.ImageCategory
 
 sealed interface GalleryType {
     fun getDisplayName(): String
@@ -16,18 +17,18 @@ sealed interface GalleryType {
         override fun getId(): String? = null
     }
 
-    data class Breed(val breedModel: com.viniciuscoscia.catchacat.domain.entity.Breed) :
+    data class Breed(val catBreed: CatBreed) :
         GalleryType {
         override fun getDisplayName() =
-            "Breed: ${breedModel.name.lowercase().replaceFirstChar { it.uppercase() }} >"
+            "Breed: ${catBreed.name.lowercase().replaceFirstChar { it.uppercase() }} >"
 
-        override fun getId(): String = breedModel.id
+        override fun getId(): String = catBreed.id
     }
 
-    data class Category(val categoryUIModel: CatImageCategory) : GalleryType {
+    data class Category(val imageCategory: ImageCategory) : GalleryType {
         override fun getDisplayName() =
-            "Category: ${categoryUIModel.name}}"
+            "Category: ${imageCategory.name} >"
 
-        override fun getId(): String = categoryUIModel.id
+        override fun getId(): String = imageCategory.id
     }
 }

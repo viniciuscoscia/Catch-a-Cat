@@ -1,6 +1,6 @@
 package com.viniciuscoscia.catchacat.domain.usecase
 
-import com.viniciuscoscia.catchacat.domain.entity.CatImageCategory
+import com.viniciuscoscia.catchacat.domain.entity.ImageCategory
 import com.viniciuscoscia.catchacat.domain.repository.CatRepository
 import timber.log.Timber
 
@@ -13,5 +13,5 @@ class GetImageCategoriesUseCaseImpl(
 }
 
 interface GetImageCategoriesUseCase {
-    suspend operator fun invoke(): Result<List<CatImageCategory>>
+    suspend operator fun invoke(): Result<List<ImageCategory>>
 }

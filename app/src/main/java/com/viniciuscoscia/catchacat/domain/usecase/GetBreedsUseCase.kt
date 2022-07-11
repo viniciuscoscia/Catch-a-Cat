@@ -1,6 +1,6 @@
 package com.viniciuscoscia.catchacat.domain.usecase
 
-import com.viniciuscoscia.catchacat.domain.entity.Breed
+import com.viniciuscoscia.catchacat.domain.entity.CatBreed
 import com.viniciuscoscia.catchacat.domain.repository.CatRepository
 
 class GetBreedsUseCaseImpl(private val catRepository: CatRepository) : GetBreedsUseCase {
@@ -8,5 +8,5 @@ class GetBreedsUseCaseImpl(private val catRepository: CatRepository) : GetBreeds
 }
 
 interface GetBreedsUseCase {
-    suspend operator fun invoke(): Result<List<Breed>>
+    suspend operator fun invoke(): Result<List<CatBreed>>
 }

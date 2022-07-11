@@ -37,12 +37,12 @@ class ImageGalleryFactory(
                     }
                     is GalleryType.Breed -> {
                         ImageSearchParam.BreedId(
-                            breedId = galleryType.breedModel.id
+                            breedId = galleryType.catBreed.id
                         )
                     }
                     is GalleryType.Category -> {
                         ImageSearchParam.CategoryIds(
-                            category = galleryType.categoryUIModel.id.toInt()
+                            category = galleryType.imageCategory.id.toInt()
                         )
                     }
                 }

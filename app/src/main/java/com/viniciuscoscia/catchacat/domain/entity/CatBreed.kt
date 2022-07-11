@@ -1,6 +1,6 @@
 package com.viniciuscoscia.catchacat.domain.entity
 
-data class Breed(
+data class CatBreed(
     val id: String,
     val name: String,
     val adaptability: Int? = null,
