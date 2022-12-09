@@ -131,8 +131,4 @@ dependencies {
     testImplementation(Libs.coroutineTest)
     androidTestImplementation(Libs.androidExtJUnit)
     androidTestImplementation(Libs.androidEspresso)
-
-    // AWS
-    implementation(Libs.amplify)
-    implementation(Libs.amplifyCognito)
 }
