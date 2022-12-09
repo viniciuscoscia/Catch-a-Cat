@@ -18,7 +18,6 @@ class CatchACatApplication : Application() {
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
         }
-        // TODO Clean up this file
         setupKoin()
         Playground()
     }
